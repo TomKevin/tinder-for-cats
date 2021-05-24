@@ -5,11 +5,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/index';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Importing Page Components
+import Home from './components/pages/Index';
+import Breeds from './components/pages/Breeds';
+import Categories from './components/pages/Categories';
+import Favourites from './components/pages/Favourites';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/breeds" component={Breeds} />
+            <Route exact path="/categories" component={Categories} />
+            <Route exact path="/favourites" component={Favourites} />
+          </Switch>
+        </div>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

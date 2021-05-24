@@ -4,6 +4,7 @@ import  { combineReducers } from 'redux';
 import catReducer from './CatReducer';
 import breedReducer from './BreedReducer';
 import categoryReducer from './CategoryReducer';
+import favouriteReducer from './FavouriteReducer';
 
 export default combineReducers({
 
@@ -11,6 +12,8 @@ export default combineReducers({
 
     breeds: breedReducer,
 
-    categories: categoryReducer
+    categories: categoryReducer,
+
+    favourites: favouriteReducer
 
 });
