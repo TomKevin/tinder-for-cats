@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import CatCard from './../common/CatCard';
+import { connect } from 'react-redux';
+import { getCats } from './../../store/actions/CatActions';
+import { getBreeds } from './../../store/actions/BreedActions';
+import { getCategories } from './../../store/actions/CategoryActions';
 import HeaderImage from './../img/1.jpg';
 
 class Main extends Component {
@@ -14,8 +19,22 @@ class Main extends Component {
         }
 
     }
+
+    componentDidMount = async () => {
+
+        await this.props.getCats();
+
+        await this.props.getBreeds();
+
+        await this.props.getCategories();
+
+    }
     
     render() {
+
+        const { cats, breeds, categories } = this.props;
+
+        console.log(categories);
 
         return (
 
@@ -87,57 +106,13 @@ class Main extends Component {
 
                 </div>
 
-                <div className="container px-12 py-5 mx-auto grid grid-cols-1 md:grid-cols-4 min-h-screen">
+                <div className="container px-12 py-5 mx-auto grid grid-cols-1 md:grid-cols-4 min-h-screen gap-3">
 
-                    <div className="bg-white w-full relative h-80 rounded-2xl shadow-lg">
+                    {cats.data.map((cat, i) => 
 
-                        <img className="object-cover h-full rounded-2xl" src={HeaderImage} alt="TinderCats" />
+                        <CatCard key={i} cat={cat} />
 
-                        <div className="absolute inset-0 bg-gray-900 bg-opacity-70 h-full flex flex-row justify-end items-start rounded-2xl p-8">
-
-                            <div className="relative flex flex-row justify-between items-end w-full h-full">
-
-                                <div className="flex flex-col">
-
-                                    <h2 className="text-white capitalize text-md">Name</h2>
-
-                                    <p className="text-gray-400 text-sm capitalize">Long Description</p>
-
-                                </div>
-
-                                <div className="flex flex-row justify-between items-center gap-x-3">
-
-                                    <button className="text-gray-50 bg-gray-50 bg-opacity-20 p-2 rounded-full shadow-lg">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                                        </svg>
-
-                                    </button>
-
-                                    <button className="text-gray-50 bg-gray-50 bg-opacity-20 p-2 rounded-full shadow-lg">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
-                                        </svg>
-
-                                    </button>
-
-                                    <button className="text-gray-50">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                                        </svg>
-
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    )}
 
                 </div>
                 
@@ -163,4 +138,18 @@ class Main extends Component {
 
 };
 
-export default Main;
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+
+        cats: state.cats,
+
+        breeds: state.breeds,
+
+        categories: state.categories
+
+    }
+
+};
+
+export default connect(mapStateToProps, { getCats, getBreeds, getCategories })(Main);
