@@ -87,7 +87,7 @@ class Main extends Component {
 
                 </div>
 
-                <div className="container px-12 py-5 mx-auto grid grid-cols-1 md:grid-cols-4">
+                <div className="container px-12 py-5 mx-auto grid grid-cols-1 md:grid-cols-4 min-h-screen">
 
                     <div className="bg-white w-full relative h-80 rounded-2xl shadow-lg">
 
@@ -141,6 +141,19 @@ class Main extends Component {
 
                 </div>
                 
+                <footer className="flex flex-wrap items-center justify-between p-3 m-auto bg-red-900">
+
+                    <div className="container mx-auto flex flex-col flex-wrap items-center justify-between py-4">
+
+                        <div className="flex mx-auto text-white text-center">
+
+                            Designed by Kevin © 2021
+
+                        </div>
+
+                    </div>
+
+                </footer>
                 
             </div>
 
