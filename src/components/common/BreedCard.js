@@ -1,22 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Card = ({ breed }) => {
 
     return (
 
-        <div className="bg-white w-full relative h-80 rounded-2xl shadow-lg">
+        <Link to={`/breeds`}>
 
-            <img className="h-full w-full object-cover rounded-2xl" src={breed.image.url} alt="TinderCats" />
+            <div className="bg-white w-full relative h-80 rounded-2xl shadow-lg">
 
-            <div className="absolute inset-0 bg-gray-900 bg-opacity-70 h-full flex flex-row justify-end items-start rounded-2xl p-8">
+                <img className="h-full w-full object-cover rounded-2xl" src={breed.image.url} alt="TinderCats" />
 
-                <div className="relative flex flex-row justify-between items-end w-full h-full">
+                <div className="absolute inset-0 bg-gray-900 bg-opacity-70 h-full flex flex-row justify-end items-start rounded-2xl p-8">
 
-                    <div className="flex flex-col">
+                    <div className="relative flex flex-row justify-between items-end w-full h-full">
 
-                        <h2 className="text-white capitalize text-md">{breed.name}</h2>
+                        <div className="flex flex-col">
 
-                        <p className="text-gray-400 text-sm capitalize"></p>
+                            <h2 className="text-white capitalize text-md">{breed.name}</h2>
+
+                            <p className="text-gray-400 text-sm capitalize"></p>
+
+                        </div>
 
                     </div>
 
@@ -24,7 +29,7 @@ const Card = ({ breed }) => {
 
             </div>
 
-        </div>
+        </Link>
 
     )
 

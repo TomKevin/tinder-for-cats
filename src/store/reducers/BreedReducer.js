@@ -1,8 +1,10 @@
-import { GET_BREEDS } from './../types/index';
+import { GET_BREEDS, GET_BREED } from './../types/index';
 
 const initialState = {
 
     data: [],
+
+    breed: {}
 
 };
 
@@ -17,6 +19,16 @@ const breedReducer = (state = initialState, action) =>  {
                 ...state,
 
                 data: action.payload
+
+            };
+        
+        case GET_BREED:
+
+            return {
+
+                ...state,
+
+                breed: action.payload
 
             };
 

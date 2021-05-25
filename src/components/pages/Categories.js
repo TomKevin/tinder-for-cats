@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import MainLayout from './../layouts/Main';
-import { connect } from 'react-redux';
-import { getCats } from './../../store/actions/CatActions';
 
 class Categories extends Component {
 

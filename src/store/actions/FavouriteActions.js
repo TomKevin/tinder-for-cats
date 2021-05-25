@@ -18,3 +18,39 @@ export const getFavourites = () => async dispatch => {
     }
 
 };
+
+export const addFavourite = data => async dispatch => {
+
+    try {
+
+        const response = await instance.post(`favourites`, data);
+
+        return response.data;
+        
+    } catch (error) {
+
+        throw error;
+        
+    }
+
+};
+
+export const deleteFavourite = id => async dispatch => {
+
+    try {
+
+        console.log(id);
+
+        const response = await instance.delete(`favourites/${id}`);
+
+        console.log(response)
+
+        return response.data;
+        
+    } catch (error) {
+
+        throw error;
+        
+    }
+
+};

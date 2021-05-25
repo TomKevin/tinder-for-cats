@@ -1,6 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addFavourite } from './../../store/actions/FavouriteActions';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Card = ({ cat }) => {
+const Card = ({ cat, addFavourite, history }) => {
+
+    const [response, setResponse] = useState(null);
+
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        
+        return async () => {
+
+            
+
+        }
+
+    }, [response, error]);
+
+    const addImageFavourite = async id => {
+
+        try {
+
+            let obj = {};
+
+            obj.image_id = id;
+
+            const response = await addFavourite(obj);
+
+            setResponse(response);
+
+            toast.success("Favourite Added Successfully !");
+
+            setTimeout(() => {
+
+                return history.push('/favourites');
+                
+            }, 3000);
+            
+            
+        } catch (error) {
+
+            setError(error);
+            
+        }
+
+    };
 
     return (
 
@@ -14,9 +62,9 @@ const Card = ({ cat }) => {
 
                     <div className="flex flex-col">
 
-                        <h2 className="text-white capitalize text-md"></h2>
+                        {/* <h2 className="text-white capitalize text-md"></h2>
 
-                        <p className="text-gray-400 text-sm capitalize"></p>
+                        <p className="text-gray-400 text-sm capitalize"></p> */}
 
                     </div>
 
@@ -38,7 +86,7 @@ const Card = ({ cat }) => {
 
                         </button>
 
-                        <button className="text-gray-50">
+                        <button className="text-gray-50" onClick={() => { addImageFavourite(cat.id) }}>
 
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -52,10 +100,22 @@ const Card = ({ cat }) => {
 
             </div>
 
+            <ToastContainer />
+
         </div>
 
     )
 
 };
 
-export default Card;
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+
+        favourites: state.favourites
+
+    }
+
+};
+
+export default connect(mapStateToProps, { addFavourite })(withRouter(Card));

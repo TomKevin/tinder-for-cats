@@ -28,8 +28,6 @@ class Favourites extends Component {
 
         const { favourites } = this.props;
 
-        console.log(favourites)
-
         return (
 
             <MainLayout>

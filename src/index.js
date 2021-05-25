@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/index';
@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Importing Page Components
 import Home from './components/pages/Index';
 import Breeds from './components/pages/Breeds';
+import ShowBreed from './components/pages/ShowBreed';
 import Categories from './components/pages/Categories';
 import Favourites from './components/pages/Favourites';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Route exact path="/breeds" component={Breeds} />
             <Route exact path="/categories" component={Categories} />
             <Route exact path="/favourites" component={Favourites} />
+            <Route exact path="/breeds/:id" component={ShowBreed} />
           </Switch>
         </div>
       </Router>

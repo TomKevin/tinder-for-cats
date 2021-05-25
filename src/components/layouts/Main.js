@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CatCard from './../common/CatCard';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCats } from './../../store/actions/CatActions';
@@ -73,12 +72,6 @@ class Main extends Component {
                                 <li>
 
                                     <Link className="block px-4 py-1 md:p-2 lg:px-4 text-red-600" to="/favourites">Favourites</Link>
-
-                                </li>
-
-                                <li>
-
-                                    <Link className="block px-4 py-1 md:p-2 lg:px-4 text-red-600" to="/">Votes</Link>
 
                                 </li>
 
