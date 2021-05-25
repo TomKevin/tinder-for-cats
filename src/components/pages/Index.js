@@ -13,7 +13,7 @@ class Index extends Component {
     
         this.state = {
 
-
+            likes: []
              
         }
 
@@ -23,11 +23,97 @@ class Index extends Component {
 
         await this.props.getCats();
 
+        let likes = this.getLikes();
+
+        this.setState({ likes });
+
+    }
+
+    getLikes = () => {
+
+        let likes = localStorage.getItem('likes');
+
+        if(likes === null) {
+
+            return []
+
+        }
+
+        return JSON.parse(likes);
+
+    }
+
+    addLike = like => {
+
+        let likeExists = this.checkLikeExists(like);
+
+        if(likeExists === true) {
+
+            return;
+
+        }
+
+        let likes = this.getLikes();
+
+        likes.push(like);
+
+        this.setLikes(likes);
+
+    }
+
+    removeLike = like => {
+
+        let likeExists = this.checkLikeExists(like);
+
+        if(likeExists === false) {
+
+            return;
+
+        }
+
+        let likes = this.getLikes();
+
+        let index = likes.indexOf(like);
+
+        likes.splice(index, 1);
+
+        this.setLikes(likes);
+
+        return;
+
+    }
+
+    setLikes = likes => {
+
+        localStorage.setItem('likes', JSON.stringify(likes));
+
+        this.setState({ likes });
+
+        return;
+
+    }
+
+    checkLikeExists = like => {
+
+        let likes = this.getLikes();
+
+        let value  = likes.indexOf(like);
+
+        if(value === -1) {
+
+            return false;
+
+        }
+
+        return true;
+
     }
     
     render() {
 
         const { cats } = this.props;
+
+        const { likes } = this.state;
 
         return (
 
@@ -53,7 +139,7 @@ class Index extends Component {
 
                     {cats.data.map((cat, i) => 
 
-                        <CatCard key={i} cat={cat} />
+                        <CatCard key={i} cat={cat} likes={likes} addLike={this.addLike} removeLike={this.removeLike} checkLikeExists={this.checkLikeExists} />
 
                     )}
 
